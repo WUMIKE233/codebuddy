@@ -1,0 +1,36 @@
+# CodeBuddy — Default Pipeline Configuration
+
+pipeline:
+  agents: [scanner, analyzer, refactorer, validator]
+  max_iterations: 3
+  fail_on: critical
+
+scanner:
+  model: claude-sonnet-4-5-20250514
+  max_tokens: 4096
+  thinking_budget: 0
+  max_files_per_run: 200
+  min_relevance: 0.1
+
+analyzer:
+  model: claude-sonnet-4-5-20250514
+  max_tokens: 8192
+  thinking_budget: 8192
+  min_confidence: 0.6
+  max_issues_per_file: 20
+
+refactorer:
+  model: claude-sonnet-4-5-20250514
+  max_tokens: 16384
+  thinking_budget: 16384
+  max_patches: 50
+  max_files: 20
+
+validator:
+  model: claude-sonnet-4-5-20250514
+  max_tokens: 2048
+  thinking_budget: 0
+  sandbox_image: codebuddy-sandbox:latest
+  test_timeout: 300
+
+log_level: INFO

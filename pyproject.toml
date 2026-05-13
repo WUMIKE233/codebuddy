@@ -1,0 +1,58 @@
+[project]
+name = "codebuddy"
+version = "0.1.0"
+description = "Multi-Agent Code Review & Refactoring Framework powered by Claude API"
+requires-python = ">=3.12"
+license = {text = "MIT"}
+authors = [
+    {name = "CodeBuddy Team"}
+]
+keywords = ["code-review", "refactoring", "multi-agent", "claude-api", "llm"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "anthropic>=0.50.0",
+    "pydantic>=2.0",
+    "typer>=0.15",
+    "rich>=13.0",
+    "PyGithub>=2.0",
+    "GitPython>=3.1",
+    "jinja2>=3.1",
+    "python-dotenv>=1.0",
+    "structlog>=24.0",
+    "pyyaml>=6.0",
+    "docker>=7.0",
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "pytest-mock>=3.14",
+    "ruff>=0.8",
+]
+
+[project.scripts]
+codebuddy = "codebuddy.main:app"
+
+[project.entry-points."codebuddy.plugins"]
+python = "codebuddy.plugins.python.plugin:PythonPlugin"
+javascript = "codebuddy.plugins.javascript.plugin:JavaScriptPlugin"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
